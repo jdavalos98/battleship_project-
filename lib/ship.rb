@@ -1,5 +1,7 @@
 class Ship
-  attr_reader :type, :health
+  attr_reader :type
+
+  attr_accessor :health
 
   def initialize(type, health)
     @type = type
