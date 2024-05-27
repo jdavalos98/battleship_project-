@@ -5,6 +5,7 @@ class Ship
 
   def initialize(type, health)
     @type = type
+    # @length = length
     @health = health
   end
 
