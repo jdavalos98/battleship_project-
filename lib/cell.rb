@@ -26,9 +26,7 @@ class Cell
 
   def fire_upon
     @fired_upon = true
-    if !empty?
-      @ship.health -= 1
-    end
+    @ship.hit unless empty?
   end
   
   def fired_upon?
@@ -41,15 +39,22 @@ class Cell
 
   def render(reveal_ship = false) 
     if !fired_upon? && empty?
+      puts "Rendering: ."
       "."
-    elsif reveal_ship? && !empty? 
-      "S"
     elsif fired_upon? && empty?
+      puts "Rendering: M"
       "M"
     elsif fired_upon? && !empty? && !@ship.sunk?
+      puts "Rendering: H"
       "H"
-    elsif @ship.sunk? 
+    elsif reveal_ship && !empty? 
+      puts "Rendering: S"
+      "S"
+    elsif @ship.sunk?
+      puts "Rendering: X"
       "X"
+    else
+      nil
     end
   end
 end

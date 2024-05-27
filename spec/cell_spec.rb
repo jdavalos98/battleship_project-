@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe Cell do
-
-
-RSpec.describe Cell do
   before(:each) do
     @cell1 = Cell.new("B4")
     @cell2 = Cell.new("C3")
@@ -57,7 +54,6 @@ RSpec.describe Cell do
     it "can render a sunken ship" do
       @cell2.place_ship(@cruiser)
       @cell2.fire_upon
-      binding.pry
       @cruiser.hit
       @cruiser.hit
       expect(@cruiser.sunk?).to be true
