@@ -12,6 +12,10 @@ class Board
     @cells.key?(coordinate)
   end
 
+  def valid_placement?()
+    
+  end
+
   private 
 
   def generate_cells
