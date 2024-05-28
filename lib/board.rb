@@ -34,6 +34,7 @@ class Board
     return false unless placement.all?{|coordinate| valid_coordinate?(coordinate)}
     return false unless placement.length == ship.health
     return false unless consecutive_coordinates?(placement)
+    return false if overlapping?(coordinates)
     true
     
     #checks that the cell is empty before placing ship
@@ -50,7 +51,14 @@ class Board
       false
     end
   end
+  def overlapping?(coordinates)
+    coordinates.any? { |coord| !@cells[coord].empty?}
+  end
 
-  
+  def place(ship, coordinates)
+    if valid_placement?(ship, coordinates)
+      coordinates.each { |coord| @cells[coord].place_ship(ship)}
+    end
+  end
 end
 
