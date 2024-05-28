@@ -55,12 +55,26 @@ RSpec.describe Board do
       expect(@board.valid_placement?(@submarine, ["A1", "A2"])).to be true
       expect(@board.valid_placement?(@cruiser, ["B1", "C1", "D1"])).to be true
     end
-  end
-
-  describe "validates overlapping ships" do
     it "does not allow overlapping ships" do
         @board.place(@cruiser,["A1", "A2", "A3"])
         expect(@board.valid_placement?(@submarine, ["A1", "B1"])).to be false
     end
   end
+  
+  describe "rendering the game board" do
+    it "can render an empty game board" do
+      expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+
+    it "can render a board with hidden ship" do
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+      expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+
+    it "can reveal hidden ships" do
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+      expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+  end
+  
 end
