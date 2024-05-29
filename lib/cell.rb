@@ -3,9 +3,10 @@ class Cell
 
   def initialize(coordinate, fired_upon = false, reveal_ship = false)
     @coordinate = coordinate
-    @ship = ship
+    @ship = nil
     @fired_upon = fired_upon
     @reveal_ship = reveal_ship
+    @render = render
   end
 
   def empty?
@@ -39,22 +40,17 @@ class Cell
 
   def render(reveal_ship = false) 
     if !fired_upon? && empty?
-      puts "Rendering: ."
       "."
     elsif fired_upon? && empty?
-      puts "Rendering: M"
       "M"
     elsif fired_upon? && !empty? && !@ship.sunk?
-      puts "Rendering: H"
       "H"
     elsif reveal_ship && !empty? 
-      puts "Rendering: S"
       "S"
     elsif @ship.sunk?
-      puts "Rendering: X"
       "X"
     else
-      nil
+      "."
     end
   end
 end
